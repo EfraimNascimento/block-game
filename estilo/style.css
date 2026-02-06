@@ -1,0 +1,34 @@
+@charset "UTF-8";
+
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body{
+    display: flex;
+    flex-flow: column nowrap;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 100vh;
+}
+
+canvas{
+    position: relative;
+    top: 0;
+    left: 0;
+    background-color: blue;
+}
+
+.player{
+    /* Difinir configurações de estilos referentes ao player que será criado pela classe Player pelo JS */
+
+    top: 0;
+    left: 0;
+    position: absolute;
+    background-color: red;
+    border-radius: 50%;
+
+}
