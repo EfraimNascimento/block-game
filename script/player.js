@@ -1,10 +1,11 @@
 class Player{
-    constructor(x, y) {
+    constructor(initial) {
         //parametros refetente ao jogador, altura, largura, cor, etc...
-        this.x = x;
-        this.y = y;
-        this.size = 50;
-        this.step = 1
+        this.x = initial.x;
+        this.y = initial.y;
+        this.size = initial.size;
+        this.step = initial.step;
+        this.color = initial.color;
         //Este objeto define as direções do Player 
         this.keyboard = {left: false, right: false, up: false, down: false}
         //Este atributo será responsavel por chamar a função createElement, para criarmos o player no mapa (canvas)
@@ -16,6 +17,10 @@ class Player{
         //Irá criar uma div dentro do html que será o elemento referente ao player, as definições do estilo do player foram feitas no css, então a classe player foi adicionada a div recem criada
         const player = document.createElement('div');
         player.classList.add('player');
+        player.style.width = `${this.size}px`
+        player.style.height = `${this.size}px`
+        player.style.backgroundColor = `${this.color}`
+
         return player;
     }
 
@@ -37,6 +42,22 @@ class Player{
     }
 
     collisionWall() {
+        const cw = window.innerWidth;
+        const ch = window.innerHeight;
+
+        if(this.x < 0){
+            this.x = 0;
+        }
+        if(this.y < 0){
+            this.y = 0;
+        }
+
+        if((this.x + this.size) > cw){
+            this.x = cw - this.size;
+        }
+        if((this.y + this.size) > ch){
+            this.y = ch - this.size;
+        }
 
     }
 
@@ -54,12 +75,24 @@ class Player{
             const key = e.key.toLocaleLowerCase()
 
             //Utilizando um IF para cada tecla de movimento é possivél realizar a movimentação nas diagonáis
-            if(key == 'w'){ /*up*/ }
-            if(key == 'a'){ /*left*/ }                        
-            if(key == 's'){ /*down*/ }
-            if(key == 'd'){ /*right*/ }
+            if(key == 'w'){ p.keyboard.up = true }
+            if(key == 'a'){ p.keyboard.left = true }                        
+            if(key == 's'){ p.keyboard.down = true }
+            if(key == 'd'){ p.keyboard.right = true }
 
         })
+        document.body.addEventListener('keyup', (e) =>{
+            
+            const key = e.key.toLocaleLowerCase()
+            
+            //Utilizando um IF para cada tecla de movimento é possivél realizar a movimentação nas diagonáis
+            if(key == 'w'){ p.keyboard.up = false }
+            if(key == 'a'){ p.keyboard.left = false }                        
+            if(key == 's'){ p.keyboard.down = false }
+            if(key == 'd'){ p.keyboard.right = false }
+
+        })
+
     }
 
 }

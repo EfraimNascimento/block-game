@@ -1,26 +1,20 @@
 class Game {
     constructor(){
-        this.map = document.querySelector('canvas');
-        this.elements = []
+        this.map = document.getElementById('game');
+        this.instances = []
     }
 
-    addElement(element){
+    add(instance){
         //O parâmetro insertAdjacentElement irá inserir um elemento selecionado de acordo com a posição e o elemento em questão
-        this.map.insertAdjacentElement('beforeend', element)
-        this.elements.push(element)
+        this.map.insertAdjacentElement('beforeend', instance.element)
+        this.instances.push(instance)
     }
 
     //Função para inicializar o loop infinito que será o jogo em si e fara update do player
-    update(){
-        const _this = this;
-        
-
-        //utilizando o requestAnimationFrame garantimos a atualização do loop apenas quando idêntificado alguma alteração nas movimentações de frames
-        //A função run ira realizar algumas ações e após estas execuções ela irá chamar o requestAnimationFrame, isso irá gerar um loop
-        requestAnimationFrame((e) =>{
-            for(let el of _this.elements){
-                el.update()
-            }
-        }, this.update)
+    update(game){
+        for(let i of game.instances){
+            i.update()
+        }
+        requestAnimationFrame((ev) => game.update(game))
     }
 }

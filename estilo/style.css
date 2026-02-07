@@ -15,20 +15,20 @@ body{
     height: 100vh;
 }
 
-canvas{
+#game{
     position: relative;
     top: 0;
     left: 0;
-    background-color: blue;
+    width: 100%;
+    height: 100%;
+    background-color: black;
 }
 
 .player{
     /* Difinir configurações de estilos referentes ao player que será criado pela classe Player pelo JS */
-
     top: 0;
     left: 0;
     position: absolute;
-    background-color: red;
     border-radius: 50%;
 
 }
